@@ -1,0 +1,22 @@
+{
+  "name": "algorithm-sandbox",
+  "version": "1.0.0",
+  "description": "アルゴリズムを色々試すサンドボックス環境",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryokatsuse/algorithm-sandbox.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryokatsuse/algorithm-sandbox/issues"
+  },
+  "homepage": "https://github.com/ryokatsuse/algorithm-sandbox#readme",
+  "dependencies": {
+    "typescript": "^4.3.4"
+  }
+}

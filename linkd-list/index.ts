@@ -1,0 +1,1 @@
+const hogehoge: string = 'hogehoge'
