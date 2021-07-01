@@ -9,40 +9,63 @@ export class LinkedListNode<T> {
 }
 
 export class LinkedList<T> {
-  head: LinkedListNode<T> | null;
-  tail: LinkedListNode<T> | null;
-  constructor() {
-    this.head = null;
-    this.tail = null;
-  }
+  head: LinkedListNode<T> | null = null;
+  tail: LinkedListNode<T> | null = null;
+  length = 0;
 
   /**
    * 要素を追加
    *
    * @param {T} value
-   * @return {*} 
+   * @return {*}
    * @memberof LinkedList
    */
   push(value: T) {
-    const newNode = new LinkedListNode(value);
+    const newNode = new LinkedListNode<T>(value);
 
-    // If there is no head yet let's make new node a head.
-    if (!this.head) {
+    // LinkedListがemptyの場合
+    if (!this.head || !this.tail) {
       this.head = newNode;
       this.tail = newNode;
+    } else {
+      this.tail.nextNode = newNode;
+      this.tail = newNode;
+    }
+    this.length += 1;
 
-      return this;
+    return newNode;
+  }
+
+  /**
+   * 配列 -> リストに変換
+   *
+   * @param {T[]} values
+   * @memberof LinkedList
+   */
+  fromArray(values: T[]) {
+    values.forEach((value) => this.push(value));
+  }
+
+  /**
+   * リスト -> 配列に変換
+   *
+   * @return {*}  {T[]}
+   * @memberof LinkedList
+   */
+  toArray(): T[] {
+    const array = [];
+    let currentNode = this.head;
+
+    while (currentNode !== null) {
+      array.push(currentNode.value);
+      currentNode = currentNode.nextNode;
     }
 
-    // Attach new node to the end of linked list.
-    this.tail = newNode;
-    this.tail = newNode;
-
-    return this;
+    return array;
   }
+
 }
 
-const list = new LinkedList()
-list.push(1)
-list.push(4)
-console.log(list)
+const list = new LinkedList();
+console.log(list.push(1));
+console.log(list.toArray());
