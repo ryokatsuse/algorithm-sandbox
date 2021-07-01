@@ -26,7 +26,6 @@ var LinkedList = /** @class */ (function () {
      */
     LinkedList.prototype.push = function (value) {
         var newNode = new LinkedListNode(value);
-        // LinkedListがemptyの場合
         if (!this.head || !this.tail) {
             this.head = newNode;
             this.tail = newNode;

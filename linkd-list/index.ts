@@ -23,7 +23,6 @@ export class LinkedList<T> {
   push(value: T) {
     const newNode = new LinkedListNode<T>(value);
 
-    // LinkedListがemptyの場合
     if (!this.head || !this.tail) {
       this.head = newNode;
       this.tail = newNode;
