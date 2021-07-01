@@ -89,6 +89,48 @@ export class LinkedList<T> {
     return currentNode;
   }
 
+  /**
+   * リストの削除
+   *
+   * @memberof LinkedList
+   */
+  removeHead() {
+    if (this.head === null)
+      return
+    else {
+      this.head = this.head.nextNode;
+      this.length--;
+    }
+  }
+
+  /**
+   *  値を削除する
+   *
+   * @param {T} value
+   * @return {*} 
+   * @memberof LinkedList
+   */
+  deleteValue(value: T) {
+    if (this.head?.value === value)
+      return this.removeHead();
+
+    let currentNode = this.head?.nextNode;
+    let previousNode = this.head;
+
+    while (currentNode) {
+      if (currentNode.value === value) break;
+
+      previousNode = currentNode;
+      currentNode = currentNode.nextNode;
+    }
+
+    if (currentNode) {
+      if (!previousNode) return
+      previousNode.nextNode = currentNode?.nextNode;
+      this.length--;
+    }
+  }
+
 }
 
 const list = new LinkedList();
@@ -96,5 +138,6 @@ list.push(2)
 list.push(3)
 list.push(5)
 list.push(0)
+list.deleteValue(0)
 console.log(list.toArray());
 console.log(list.find(0)?.value);

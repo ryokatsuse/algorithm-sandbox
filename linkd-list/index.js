@@ -84,6 +84,45 @@ var LinkedList = /** @class */ (function () {
         }
         return currentNode;
     };
+    /**
+     * リストの削除
+     *
+     * @memberof LinkedList
+     */
+    LinkedList.prototype.removeHead = function () {
+        if (this.head === null)
+            return;
+        else {
+            this.head = this.head.nextNode;
+            this.length--;
+        }
+    };
+    /**
+     *  値を削除する
+     *
+     * @param {T} value
+     * @return {*}
+     * @memberof LinkedList
+     */
+    LinkedList.prototype.deleteValue = function (value) {
+        var _a, _b;
+        if (((_a = this.head) === null || _a === void 0 ? void 0 : _a.value) === value)
+            return this.removeHead();
+        var currentNode = (_b = this.head) === null || _b === void 0 ? void 0 : _b.nextNode;
+        var previousNode = this.head;
+        while (currentNode) {
+            if (currentNode.value === value)
+                break;
+            previousNode = currentNode;
+            currentNode = currentNode.nextNode;
+        }
+        if (currentNode) {
+            if (!previousNode)
+                return;
+            previousNode.nextNode = currentNode === null || currentNode === void 0 ? void 0 : currentNode.nextNode;
+            this.length--;
+        }
+    };
     return LinkedList;
 }());
 exports.LinkedList = LinkedList;
@@ -92,5 +131,6 @@ list.push(2);
 list.push(3);
 list.push(5);
 list.push(0);
+list.deleteValue(0);
 console.log(list.toArray());
 console.log((_a = list.find(0)) === null || _a === void 0 ? void 0 : _a.value);
