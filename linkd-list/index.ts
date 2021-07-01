@@ -130,6 +130,33 @@ export class LinkedList<T> {
     }
   }
 
+
+  /**
+   * リストを反転させる
+   *
+   * @return {*} 
+   * @memberof LinkedList
+   */
+  reverse() {
+    let currentNode = this.head;
+    let previousNode = null;
+    // 命名被ってるから後で考える
+    let nextNode = null;
+
+    while (currentNode) {
+      nextNode = currentNode.nextNode;
+      currentNode.nextNode = previousNode;
+      previousNode = currentNode;
+      currentNode = nextNode;
+    }
+
+    // Reset head and tail.
+    this.tail = this.head;
+    this.head = previousNode;
+
+    return this;
+  }
+
 }
 
 const list = new LinkedList();
@@ -138,5 +165,7 @@ list.push(3)
 list.push(5)
 list.push(0)
 list.deleteValue(0)
-console.log(list.toArray());
+console.log(list);
+// console.log(list.toArray());
+console.log(list.reverse());
 console.log(list.find(0)?.value);

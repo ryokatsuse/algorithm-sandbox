@@ -122,6 +122,28 @@ var LinkedList = /** @class */ (function () {
             this.length--;
         }
     };
+    /**
+     * リストを反転させる
+     *
+     * @return {*}
+     * @memberof LinkedList
+     */
+    LinkedList.prototype.reverse = function () {
+        var currentNode = this.head;
+        var previousNode = null;
+        // 命名被ってるから後で考える
+        var nextNode = null;
+        while (currentNode) {
+            nextNode = currentNode.nextNode;
+            currentNode.nextNode = previousNode;
+            previousNode = currentNode;
+            currentNode = nextNode;
+        }
+        // Reset head and tail.
+        this.tail = this.head;
+        this.head = previousNode;
+        return this;
+    };
     return LinkedList;
 }());
 exports.LinkedList = LinkedList;
@@ -131,5 +153,7 @@ list.push(3);
 list.push(5);
 list.push(0);
 list.deleteValue(0);
-console.log(list.toArray());
+console.log(list);
+// console.log(list.toArray());
+console.log(list.reverse());
 console.log((_a = list.find(0)) === null || _a === void 0 ? void 0 : _a.value);
