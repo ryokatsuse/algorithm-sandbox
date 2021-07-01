@@ -1,4 +1,5 @@
 "use strict";
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LinkedList = exports.LinkedListNode = void 0;
 var LinkedListNode = /** @class */ (function () {
@@ -62,9 +63,34 @@ var LinkedList = /** @class */ (function () {
         }
         return array;
     };
+    /**
+     * toArrayの中でx番目の要素を検索する
+     *
+     * @param {number} index
+     * @return {*}
+     * @memberof LinkedList
+     */
+    LinkedList.prototype.find = function (index) {
+        var currentIndex = 0;
+        var currentNode = this.head;
+        if (index > this.length) {
+            throw new Error("\u304A\u63A2\u3057\u306E(" + index + ")\u306F\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3067\u3057\u305F\u3002");
+        }
+        while (currentIndex < index) {
+            if (currentNode === null || currentNode === void 0 ? void 0 : currentNode.nextNode) {
+                currentIndex += 1;
+                currentNode = currentNode === null || currentNode === void 0 ? void 0 : currentNode.nextNode;
+            }
+        }
+        return currentNode;
+    };
     return LinkedList;
 }());
 exports.LinkedList = LinkedList;
 var list = new LinkedList();
-console.log(list.push(1));
+list.push(2);
+list.push(3);
+list.push(5);
+list.push(0);
 console.log(list.toArray());
+console.log((_a = list.find(0)) === null || _a === void 0 ? void 0 : _a.value);

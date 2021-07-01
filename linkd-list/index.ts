@@ -64,8 +64,37 @@ export class LinkedList<T> {
     return array;
   }
 
+  /**
+   * toArrayの中でx番目の要素を検索する
+   *
+   * @param {number} index
+   * @return {*} 
+   * @memberof LinkedList
+   */
+  find(index: number) {
+    let currentIndex = 0;
+    let currentNode = this.head;
+
+    if (index > this.length) {
+      throw new Error(`お探しの(${index})は見つかりませんでした。`);
+    }
+
+    while (currentIndex < index) {
+      if (currentNode?.nextNode) {
+        currentIndex += 1;
+        currentNode = currentNode?.nextNode;
+      }
+    }
+
+    return currentNode;
+  }
+
 }
 
 const list = new LinkedList();
-console.log(list.push(1));
+list.push(2)
+list.push(3)
+list.push(5)
+list.push(0)
 console.log(list.toArray());
+console.log(list.find(0)?.value);
