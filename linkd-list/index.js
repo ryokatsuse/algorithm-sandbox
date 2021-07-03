@@ -97,6 +97,26 @@ var LinkedList = /** @class */ (function () {
         }
     };
     /**
+     * headを削除する
+     *
+     * @return {*}
+     * @memberof LinkedList
+     */
+    LinkedList.prototype.deleteHead = function () {
+        if (!this.head) {
+            return null;
+        }
+        var deletedHead = this.head;
+        if (this.head.nextNode) {
+            this.head = this.head.nextNode;
+        }
+        else {
+            this.head = null;
+            this.tail = null;
+        }
+        return deletedHead;
+    };
+    /**
      *  値を削除する
      *
      * @param {T} value

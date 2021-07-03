@@ -102,6 +102,30 @@ export class LinkedList<T> {
     }
   }
 
+
+  /**
+   * headを削除する
+   *
+   * @return {*} 
+   * @memberof LinkedList
+   */
+  deleteHead() {
+    if (!this.head) {
+      return null;
+    }
+
+    const deletedHead = this.head;
+
+    if (this.head.nextNode) {
+      this.head = this.head.nextNode;
+    } else {
+      this.head = null;
+      this.tail = null;
+    }
+
+    return deletedHead;
+  }
+
   /**
    *  値を削除する
    *
