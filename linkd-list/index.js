@@ -142,6 +142,18 @@ var LinkedList = /** @class */ (function () {
             this.length--;
         }
     };
+    LinkedList.prototype.findBy = function (callback) {
+        var currentNode = this.head;
+        while (currentNode !== null) {
+            if (callback(currentNode)) {
+                return currentNode;
+            }
+            if (currentNode === null || currentNode === void 0 ? void 0 : currentNode.nextNode) {
+                currentNode = currentNode === null || currentNode === void 0 ? void 0 : currentNode.nextNode;
+            }
+        }
+        return null;
+    };
     /**
      * リストを反転させる
      *

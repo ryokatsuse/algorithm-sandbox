@@ -156,6 +156,32 @@ export class LinkedList<T> {
 
 
   /**
+   * 要素の検索
+   *
+   * @param {(currentNode: LinkedListNode<T>) => boolean} callback
+   * @return {*}  {(LinkedListNode<T> | null)}
+   * @memberof LinkedList
+   */
+  findBy(
+    callback: (currentNode: LinkedListNode<T>) => boolean
+  ): LinkedListNode<T> | null {
+    let currentNode = this.head;
+
+    while (currentNode !== null) {
+      if (callback(currentNode)) {
+        return currentNode;
+      }
+
+      if (currentNode?.nextNode) {
+        currentNode = currentNode?.nextNode;
+      }
+    }
+
+    return null;
+  }
+
+
+  /**
    * リストを反転させる
    *
    * @return {*} 
