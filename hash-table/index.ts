@@ -1,10 +1,12 @@
+
+import { LinkedList, LinkedListNode } from '../linkd-list/index';
 export class HashTable {
   hashTableSize: number
-  table: unknown[]
+  table: LinkedList<{ key: string; value: unknown }>[]
 
   constructor(size: number) {
     this.hashTableSize = size
-    this.table = []
+    this.table = Array({ length: size }).map(() => new LinkedList())
   }
   /**
    * ハッシュ関数
@@ -13,7 +15,7 @@ export class HashTable {
    * @memberof HashTable
    */
   hash(key: string) {
-    const codeAtNumber = 3000
+    const codeAtNumber = 100
     let id = 0
     for (let i = 0; i < key.length; i++) {
       /** 
@@ -33,28 +35,28 @@ export class HashTable {
    */
   set(key: string, value: unknown) {
     const id = this.hash(key)
-    this.table[id] = value
+    const list = this.table[id]
+    list.push({ key, value })
   }
 
 
   /**
-   * ハッシュキー取得
+   * ハッシュキーから値を検索して取得する
    * @param {string} key
    * @return {*} 
    * @memberof HashTable
    */
-  get(key: string) {
-    const id = this.hash(key)
-    const value = this.table[id]
+  get(key: string): LinkedListNode<{ key: string; value: unknown }> | null {
+    const id = this.hash(key);
+    const linkedList = this.table[id];
 
-    return value
+    return linkedList.findBy((current) => current.value.key === key);
   }
 }
 
-const hashTable = new HashTable(3000);
-hashTable.set('kkkkkkkk', 'Ryo Katsuse');
-console.log(hashTable)
-
-console.log(hashTable.hash('Ryo Katsuse'));
-
+const hashTable = new HashTable(100);
+hashTable.set('name', 'Ryo Katsuse')
+hashTable.set('age', '35歳')
+console.log(hashTable.hash('name'))
+console.log(hashTable.get('name')?.value);
 

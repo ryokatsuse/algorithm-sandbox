@@ -1,10 +1,12 @@
 "use strict";
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HashTable = void 0;
+var index_1 = require("../linkd-list/index");
 var HashTable = /** @class */ (function () {
     function HashTable(size) {
         this.hashTableSize = size;
-        this.table = [];
+        this.table = Array({ length: size }).map(function () { return new index_1.LinkedList(); });
     }
     /**
      * ハッシュ関数
@@ -13,7 +15,7 @@ var HashTable = /** @class */ (function () {
      * @memberof HashTable
      */
     HashTable.prototype.hash = function (key) {
-        var codeAtNumber = 3000;
+        var codeAtNumber = 100;
         var id = 0;
         for (var i = 0; i < key.length; i++) {
             /**
@@ -31,23 +33,25 @@ var HashTable = /** @class */ (function () {
      */
     HashTable.prototype.set = function (key, value) {
         var id = this.hash(key);
-        this.table[id] = value;
+        var list = this.table[id];
+        list.push({ key: key, value: value });
     };
     /**
-     * ハッシュキー取得
+     * ハッシュキーから値を検索して取得する
      * @param {string} key
      * @return {*}
      * @memberof HashTable
      */
     HashTable.prototype.get = function (key) {
         var id = this.hash(key);
-        var value = this.table[id];
-        return value;
+        var linkedList = this.table[id];
+        return linkedList.findBy(function (current) { return current.value.key === key; });
     };
     return HashTable;
 }());
 exports.HashTable = HashTable;
-var hashTable = new HashTable(3000);
-hashTable.set('kkkkkkkk', 'Ryo Katsuse');
-console.log(hashTable);
-console.log(hashTable.hash('Ryo Katsuse'));
+var hashTable = new HashTable(100);
+hashTable.set('name', 'Ryo Katsuse');
+hashTable.set('age', '35歳');
+console.log(hashTable.hash('name'));
+console.log((_a = hashTable.get('name')) === null || _a === void 0 ? void 0 : _a.value);

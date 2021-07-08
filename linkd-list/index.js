@@ -142,6 +142,13 @@ var LinkedList = /** @class */ (function () {
             this.length--;
         }
     };
+    /**
+     * 要素の検索
+     *
+     * @param {(currentNode: LinkedListNode<T>) => boolean} callback
+     * @return {*}  {(LinkedListNode<T> | null)}
+     * @memberof LinkedList
+     */
     LinkedList.prototype.findBy = function (callback) {
         var currentNode = this.head;
         while (currentNode !== null) {
